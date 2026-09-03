@@ -38,6 +38,15 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (!menuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const headerOffset = 120;
       const windowHeight = window.innerHeight;
@@ -228,7 +237,7 @@ export default function Navbar() {
               href={href}
               onClick={(e) => handleNavClick(e, href, key)}
               className={`mobile-nav-link ${active === key ? "mobile-nav-link-active" : ""}`}
-              style={{ animationDelay: menuOpen ? `${i * 60}ms` : "0ms" }}
+              style={{ "--link-delay": `${i * 40}ms` }}
             >
               <span className="mobile-nav-link-text">{t.nav[key]}</span>
               <svg
