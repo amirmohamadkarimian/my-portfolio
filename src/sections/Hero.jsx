@@ -1,6 +1,11 @@
 import { useLang } from "../i18n/context";
 
-const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+const PARTICLE_COUNT =
+  typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
+    ? 8
+    : 14;
+
+const PARTICLES = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
   id: i,
   size: Math.random() * 6 + 3,
   left: Math.random() * 100,
@@ -16,11 +21,10 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden bg-bg-deep pt-[72px]"
     >
-      {/* Background gradient blobs */}
-      <div className="absolute inset-0 pointer-events-none" style={{ contain: "strict" }}>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-accent/5 blur-[80px]" style={{ willChange: "transform" }} />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-accent-alt/8 blur-[60px]" style={{ willChange: "transform" }} />
-        <div className="absolute top-3/4 left-1/2 w-64 h-64 rounded-full bg-accent/4 blur-[50px]" style={{ willChange: "transform" }} />
+      {/* Background gradient blobs — static, no will-change */}
+      <div className="absolute inset-0 pointer-events-none hero-blobs">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-accent/5 blur-[80px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-accent-alt/8 blur-[60px]" />
       </div>
 
       {/* Floating particles */}
@@ -56,11 +60,27 @@ export default function Hero() {
               <div className="absolute inset-3 rounded-full glow-amber-pulse" />
               {/* Photo frame */}
               <div className="absolute inset-4 rounded-full overflow-hidden border-2 border-accent/60 glow-amber">
-                <img
-                  src="/selfie.png"
-                  alt="Amirmohamad Karimian"
-                  className="w-full h-full object-cover object-top"
-                />
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet="/selfie-320.avif 320w, /selfie-640.avif 640w"
+                    sizes="(min-width: 1024px) 320px, 256px"
+                  />
+                  <source
+                    type="image/webp"
+                    srcSet="/selfie-320.webp 320w, /selfie-640.webp 640w"
+                    sizes="(min-width: 1024px) 320px, 256px"
+                  />
+                  <img
+                    src="/selfie.jpg"
+                    alt="Amirmohamad Karimian"
+                    width={320}
+                    height={320}
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </picture>
               </div>
             </div>
           </div>

@@ -141,6 +141,17 @@ html[dir="rtl"] * {
   padding-right: 1.5rem;
 }
 
+/* Skip rendering off-screen sections until near viewport */
+main > section:not(#hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Hero background blobs — isolate paint layer */
+.hero-blobs {
+  contain: strict;
+}
+
 /* ─── Section Label ─── */
 .section-label {
   display: inline-flex;
@@ -233,7 +244,6 @@ html[dir="rtl"] .skill-bar-fill {
   opacity: 0;
   transform: translateY(30px) translateZ(0);
   transition: opacity 0.7s ease, transform 0.7s ease;
-  will-change: opacity, transform;
 }
 
 .reveal.visible {
@@ -321,6 +331,14 @@ textarea:focus-visible {
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .floating-dot {
+    display: none;
+  }
+
+  .hero-blobs {
+    display: none;
   }
 }
 

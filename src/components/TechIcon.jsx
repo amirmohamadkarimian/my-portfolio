@@ -98,23 +98,26 @@ export function ReactIcon({ className = "w-5 h-5", ...props }) {
 }
 
 export function NextjsIcon({ className = "w-5 h-5", ...props }) {
+  const uid = React.useId().replace(/:/g, "");
+  const gradId = `nextjs-grad-${uid}`;
+
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
-      <circle cx="12" cy="12" r="11" fill="#000000" stroke="#333333" strokeWidth="1" />
+      <circle cx="12" cy="12" r="10.5" fill="#FFFFFF" />
       <path
         d="M16.2 17.5l-6.8-8.8v8.8H7.5V6.5h1.9l6.8 8.8V6.5h1.9v11h-1.9z"
-        fill="#FFFFFF"
+        fill="#000000"
       />
       <path
         d="M15.2 13.2l2.3 3"
-        stroke="url(#nextjs-grad)"
+        stroke={`url(#${gradId})`}
         strokeWidth="1.5"
         strokeLinecap="round"
       />
       <defs>
-        <linearGradient id="nextjs-grad" x1="15" y1="13" x2="17.5" y2="16.5" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFFFFF" />
-          <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+        <linearGradient id={gradId} x1="15" y1="13" x2="17.5" y2="16.5" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#000000" />
+          <stop offset="1" stopColor="#000000" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
@@ -122,22 +125,26 @@ export function NextjsIcon({ className = "w-5 h-5", ...props }) {
 }
 
 export function ViteIcon({ className = "w-5 h-5", ...props }) {
+  const uid = React.useId().replace(/:/g, "");
+  const gradId = `vite-grad-${uid}`;
+  const boltId = `vite-bolt-${uid}`;
+
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
       <path
         d="M21.5 4.5L12.7 20.9c-.3.5-1 .5-1.3 0L2.5 4.5c-.3-.6.1-1.3.8-1.2l9 1.5 8.4-1.5c.7-.1 1.1.6.8 1.2z"
-        fill="url(#vite-grad)"
+        fill={`url(#${gradId})`}
       />
       <path
         d="M13.2 2.8L6.8 12.5h4.2l-1.8 6.5 6.8-10.2h-4.3l1.5-6z"
-        fill="url(#vite-bolt)"
+        fill={`url(#${boltId})`}
       />
       <defs>
-        <linearGradient id="vite-grad" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+        <linearGradient id={gradId} x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
           <stop stopColor="#41D1FF" />
           <stop offset="1" stopColor="#BD34FE" />
         </linearGradient>
-        <linearGradient id="vite-bolt" x1="7" y1="3" x2="16" y2="18" gradientUnits="userSpaceOnUse">
+        <linearGradient id={boltId} x1="7" y1="3" x2="16" y2="18" gradientUnits="userSpaceOnUse">
           <stop stopColor="#FFEA83" />
           <stop offset=".5" stopColor="#FFDD35" />
           <stop offset="1" stopColor="#FFA800" />
@@ -174,19 +181,21 @@ export function CSSModulesIcon({ className = "w-5 h-5", ...props }) {
 }
 
 export function StyledComponentsIcon({ className = "w-5 h-5", ...props }) {
+  const uid = React.useId().replace(/:/g, "");
+  const gradId = `styled-grad-${uid}`;
+
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
-      {/* Nail polish bottle / component design */}
       <rect x="9" y="3" width="6" height="5" rx="1" fill="#FFC0CB" stroke="#DB7093" strokeWidth="1.2" />
       <path
         d="M7 8h10a1 1 0 011 1l-1.5 10a2 2 0 01-2 1.8H9.5a2 2 0 01-2-1.8L6 9a1 1 0 011-1z"
-        fill="url(#styled-grad)"
+        fill={`url(#${gradId})`}
         stroke="#DB7093"
         strokeWidth="1.2"
       />
       <circle cx="10" cy="14" r="1" fill="#FFFFFF" fillOpacity="0.7" />
       <defs>
-        <linearGradient id="styled-grad" x1="7" y1="8" x2="17" y2="20" gradientUnits="userSpaceOnUse">
+        <linearGradient id={gradId} x1="7" y1="8" x2="17" y2="20" gradientUnits="userSpaceOnUse">
           <stop stopColor="#FF7EB3" />
           <stop offset="1" stopColor="#FF758C" />
         </linearGradient>
@@ -201,6 +210,19 @@ export function GitIcon({ className = "w-5 h-5", ...props }) {
       <path
         d="M21.7 11L13 2.3c-.4-.4-1.1-.4-1.5 0L9.4 4.5l3.2 3.2c.4-.1.9 0 1.2.3.5.5.5 1.3.1 1.8l2.7 2.7c.5-.3 1.3-.3 1.8.2.5.5.5 1.3 0 1.9s-1.3.5-1.9 0c-.4-.4-.5-1-.2-1.5l-2.6-2.6V15c.3.2.5.5.5.9 0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5c0-.4.2-.8.5-1.1v-4.7c-.3-.2-.5-.5-.5-.9 0-.4.2-.8.5-1.1L7.5 6.4 2.3 11.6c-.4.4-.4 1.1 0 1.5l8.7 8.7c.4.4 1.1.4 1.5 0l9.2-9.3c.4-.4.4-1.1 0-1.5z"
         fill="#F05032"
+      />
+    </svg>
+  );
+}
+
+export function GitHubIcon({ className = "w-5 h-5", ...props }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2C6.477 2 2 6.594 2 12.253c0 4.522 2.865 8.35 6.839 9.694.5.092.682-.217.682-.483 0-.237-.009-.866-.014-1.7-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.253C22 6.594 17.522 2 12 2z"
+        fill="#FFFFFF"
       />
     </svg>
   );
@@ -275,6 +297,33 @@ export function ZustandIcon({ className = "w-5 h-5", ...props }) {
   );
 }
 
+export function I18nIcon({ className = "w-5 h-5", ...props }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
+      <circle cx="12" cy="12" r="9" stroke="#38BDF8" strokeWidth="1.5" />
+      <ellipse cx="12" cy="12" rx="4.5" ry="9" stroke="#38BDF8" strokeWidth="1.2" />
+      <path d="M3.5 9h17M3.5 15h17" stroke="#38BDF8" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M12 3c2 2.5 3 5.5 3 9s-1 6.5-3 9" stroke="#818CF8" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M12 3c-2 2.5-3 5.5-3 9s1 6.5 3 9" stroke="#818CF8" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function DnDIcon({ className = "w-5 h-5", ...props }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
+      <rect x="4" y="5" width="16" height="5" rx="1.5" fill="#6366F1" fillOpacity="0.2" stroke="#818CF8" strokeWidth="1.4" />
+      <rect x="4" y="14" width="16" height="5" rx="1.5" fill="#6366F1" fillOpacity="0.15" stroke="#818CF8" strokeWidth="1.4" />
+      <circle cx="8" cy="7.5" r="0.9" fill="#A5B4FC" />
+      <circle cx="12" cy="7.5" r="0.9" fill="#A5B4FC" />
+      <circle cx="16" cy="7.5" r="0.9" fill="#A5B4FC" />
+      <circle cx="8" cy="16.5" r="0.9" fill="#A5B4FC" />
+      <circle cx="12" cy="16.5" r="0.9" fill="#A5B4FC" />
+      <circle cx="16" cy="16.5" r="0.9" fill="#A5B4FC" />
+    </svg>
+  );
+}
+
 export function DefaultTechIcon({ className = "w-5 h-5", ...props }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" {...props}>
@@ -285,16 +334,29 @@ export function DefaultTechIcon({ className = "w-5 h-5", ...props }) {
 }
 
 /**
- * Normalizes tech name and returns corresponding SVG component
+ * Normalizes tech name and returns corresponding SVG component.
+ * More-specific names are checked first to avoid false matches.
  */
 export default function TechIcon({ name, className = "w-5 h-5", ...props }) {
   const clean = (name || "").toLowerCase().trim();
 
-  if (clean.includes("javascript") || clean === "js") {
-    return <JavaScriptIcon className={className} {...props} />;
+  if (/styled[\s-]*components?/.test(clean)) {
+    return <StyledComponentsIcon className={className} {...props} />;
+  }
+  if (/css[\s-]*modules?/.test(clean)) {
+    return <CSSModulesIcon className={className} {...props} />;
+  }
+  if (clean.includes("tailwind")) {
+    return <TailwindIcon className={className} {...props} />;
+  }
+  if (clean.includes("vite")) {
+    return <ViteIcon className={className} {...props} />;
   }
   if (clean.includes("typescript") || clean === "ts") {
     return <TypeScriptIcon className={className} {...props} />;
+  }
+  if (clean.includes("javascript") || clean === "js") {
+    return <JavaScriptIcon className={className} {...props} />;
   }
   if (clean.includes("html") || clean === "html5") {
     return <HTML5Icon className={className} {...props} />;
@@ -302,32 +364,17 @@ export default function TechIcon({ name, className = "w-5 h-5", ...props }) {
   if (clean === "css" || clean === "css3") {
     return <CSS3Icon className={className} {...props} />;
   }
-  if (clean.includes("react")) {
-    return <ReactIcon className={className} {...props} />;
-  }
   if (clean.includes("next")) {
     return <NextjsIcon className={className} {...props} />;
   }
-  if (clean.includes("vite")) {
-    return <ViteIcon className={className} {...props} />;
+  if (clean.includes("react")) {
+    return <ReactIcon className={className} {...props} />;
   }
-  if (clean.includes("tailwind")) {
-    return <TailwindIcon className={className} {...props} />;
-  }
-  if (clean.includes("modules")) {
-    return <CSSModulesIcon className={className} {...props} />;
-  }
-  if (clean.includes("styled") || clean.includes("components")) {
-    return <StyledComponentsIcon className={className} {...props} />;
+  if (clean.includes("github")) {
+    return <GitHubIcon className={className} {...props} />;
   }
   if (clean.includes("git")) {
     return <GitIcon className={className} {...props} />;
-  }
-  if (clean.includes("api") || clean.includes("rest")) {
-    return <RestApiIcon className={className} {...props} />;
-  }
-  if (clean.includes("figma")) {
-    return <FigmaIcon className={className} {...props} />;
   }
   if (clean.includes("websocket")) {
     return <WebSocketIcon className={className} {...props} />;
@@ -337,6 +384,18 @@ export default function TechIcon({ name, className = "w-5 h-5", ...props }) {
   }
   if (clean.includes("zustand")) {
     return <ZustandIcon className={className} {...props} />;
+  }
+  if (clean.includes("figma")) {
+    return <FigmaIcon className={className} {...props} />;
+  }
+  if (/i18n|internationali[sz]ation|locali[sz]ation|locale/.test(clean)) {
+    return <I18nIcon className={className} {...props} />;
+  }
+  if (/dnd|drag[\s-]*drop|drag[\s-]*and[\s-]*drop/.test(clean)) {
+    return <DnDIcon className={className} {...props} />;
+  }
+  if (clean.includes("api") || clean.includes("rest")) {
+    return <RestApiIcon className={className} {...props} />;
   }
 
   return <DefaultTechIcon className={className} {...props} />;

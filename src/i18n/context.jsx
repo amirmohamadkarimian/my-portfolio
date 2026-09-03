@@ -1,18 +1,31 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import en from './en';
-import fa from './fa';
-
-const translations = { en, fa };
 
 const LanguageContext = createContext(null);
+
+const VAZIRMATN_HREF = 'https://cdn.jsdelivr.net/npm/vazirmatn@33.003/Vazirmatn-font-face.css';
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => {
     return localStorage.getItem('portfolio-lang') || 'en';
   });
+  const [t, setT] = useState(en);
 
-  const t = translations[lang];
   const isRTL = lang === 'fa';
+
+  useEffect(() => {
+    let cancelled = false;
+
+    if (lang === 'fa') {
+      import('./fa').then((mod) => {
+        if (!cancelled) setT(mod.default);
+      });
+    } else {
+      setT(en);
+    }
+
+    return () => { cancelled = true; };
+  }, [lang]);
 
   useEffect(() => {
     localStorage.setItem('portfolio-lang', lang);
@@ -23,10 +36,31 @@ export function LanguageProvider({ children }) {
       : '"Inter", sans-serif';
   }, [lang, isRTL]);
 
-  const toggleLang = () => setLang(prev => (prev === 'en' ? 'fa' : 'en'));
+  // Load Farsi font only when needed
+  useEffect(() => {
+    if (!isRTL) return;
+
+    const existing = document.querySelector(`link[href="${VAZIRMATN_HREF}"]`);
+    if (existing) return;
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = VAZIRMATN_HREF;
+    document.head.appendChild(link);
+  }, [isRTL]);
+
+  const toggleLang = useCallback(
+    () => setLang((prev) => (prev === 'en' ? 'fa' : 'en')),
+    [],
+  );
+
+  const value = useMemo(
+    () => ({ lang, t, isRTL, toggleLang }),
+    [lang, t, isRTL, toggleLang],
+  );
 
   return (
-    <LanguageContext.Provider value={{ lang, t, isRTL, toggleLang }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );

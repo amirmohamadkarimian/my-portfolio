@@ -13,10 +13,16 @@ function useCountUp(target, duration = 2000, trigger) {
   useEffect(() => {
     if (!trigger) return;
     let start = null;
+    let lastUpdate = 0;
     const step = (timestamp) => {
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
-      setCount(Math.floor(progress * target));
+      const next = Math.floor(progress * target);
+      // Batch state updates — at most ~20 per second
+      if (timestamp - lastUpdate >= 50 || progress >= 1) {
+        lastUpdate = timestamp;
+        setCount(next);
+      }
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
