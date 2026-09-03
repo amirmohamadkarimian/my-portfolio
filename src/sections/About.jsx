@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n/context";
+import TechIcon from "../components/TechIcon";
 
 const STATS = [
   { key: "projects", value: 20, suffix: "+" },
   { key: "technologies", value: 15, suffix: "+" },
   { key: "commits", value: 500, suffix: "+" },
-  { key: "coffees", value: 999, suffix: "☕" },
 ];
 
 function useCountUp(target, duration = 2000, trigger) {
@@ -79,9 +79,7 @@ export default function About() {
             </p>
 
             {/* Tech mini-badges */}
-            <div
-              className={`flex flex-wrap gap-2 ${isRTL ? "justify-end" : ""}`}
-            >
+            <div className="flex flex-wrap gap-2.5">
               {[
                 "React",
                 "TypeScript",
@@ -92,8 +90,9 @@ export default function About() {
               ].map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono text-xs text-accent-alt bg-accent-alt/10 border border-accent-alt/20 px-3 py-1.5 rounded-full"
+                  className="inline-flex items-center gap-2 font-mono text-xs text-text-primary bg-bg-surface hover:border-accent/40 border border-border-subtle px-3 py-1.5 rounded-full transition-all"
                 >
+                  <TechIcon name={tech} className="w-3.5 h-3.5 flex-shrink-0" />
                   {tech}
                 </span>
               ))}
@@ -116,6 +115,11 @@ export default function About() {
                   trigger={triggered}
                 />
               ))}
+              {/* Responsive Design card — fills the 4th cell */}
+              <div className="bg-bg-surface border border-border-subtle rounded-2xl p-6 text-center hover:border-accent/40 transition-colors">
+                <p className="font-display text-4xl font-black text-accent mb-1">100%</p>
+                <p className="text-text-secondary text-sm">{isRTL ? "طراحی ریسپانسیو" : "Responsive Design"}</p>
+              </div>
             </div>
 
             {/* Personal card */}
@@ -136,12 +140,12 @@ export default function About() {
                 </svg>
               </div>
               <div className={isRTL ? "text-right" : ""}>
-                <p className="text-text-primary font-semibold text-sm">
+                <p className="text-text-primary font-semibold text-sm mb-1">
                   {isRTL ? "ایران" : "Iran"}
                 </p>
                 <p className="text-text-secondary text-xs">
                   {isRTL
-                    ? "آماده همکاری بصورت ریموت "
+                    ? "آماده همکاری ریموت "
                     : "Available for remote work"}
                 </p>
               </div>

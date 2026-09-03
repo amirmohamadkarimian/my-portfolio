@@ -9,7 +9,6 @@ const en = {
     downloadCV: "Download CV",
   },
   hero: {
-    greeting: "Hi, I'm",
     name: "Amirmohamad",
     lastName: "Karimian",
     role: "Front-End Developer",

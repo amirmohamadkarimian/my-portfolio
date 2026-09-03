@@ -1,56 +1,48 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLang } from '../i18n/context';
+import TechIcon from '../components/TechIcon';
 
 const SKILLS = {
   core: [
-    { name: 'JavaScript', level: 90, icon: '⚡' },
-    { name: 'TypeScript', level: 82, icon: '🔷' },
-    { name: 'HTML5', level: 95, icon: '🌐' },
-    { name: 'CSS3', level: 90, icon: '🎨' },
+    { name: 'JavaScript', level: 90 },
+    { name: 'TypeScript', level: 82 },
+    { name: 'HTML5', level: 95 },
+    { name: 'CSS3', level: 90 },
   ],
   frameworks: [
-    { name: 'React', level: 90, icon: '⚛️' },
-    { name: 'Next.js', level: 80, icon: '▲' },
-    { name: 'Vite', level: 88, icon: '⚡' },
+    { name: 'React', level: 90 },
+    { name: 'Next.js', level: 80 },
+    { name: 'Vite', level: 88 },
   ],
   styling: [
-    { name: 'Tailwind CSS', level: 92, icon: '💨' },
-    { name: 'CSS Modules', level: 85, icon: '📦' },
-    { name: 'Styled Components', level: 75, icon: '💅' },
+    { name: 'Tailwind CSS', level: 92 },
+    { name: 'CSS Modules', level: 85 },
+    { name: 'Styled Components', level: 75 },
   ],
   tooling: [
-    { name: 'Git & GitHub', level: 88, icon: '🐙' },
-    { name: 'REST APIs', level: 85, icon: '🔌' },
-    { name: 'Figma', level: 70, icon: '🎭' },
+    { name: 'Git & GitHub', level: 88 },
+    { name: 'REST APIs', level: 85 },
+    { name: 'Figma', level: 70 },
   ],
 };
 
 const CATEGORY_ORDER = ['core', 'frameworks', 'styling', 'tooling'];
 
-const TECH_ICONS = [
-  { name: 'React', color: '#61DAFB', abbr: 'Re' },
-  { name: 'Next.js', color: '#FFFFFF', abbr: 'Nx' },
-  { name: 'TypeScript', color: '#3178C6', abbr: 'TS' },
-  { name: 'JavaScript', color: '#F7DF1E', abbr: 'JS' },
-  { name: 'Tailwind', color: '#38BDF8', abbr: 'Tw' },
-  { name: 'Vite', color: '#A855F7', abbr: 'Vi' },
-  { name: 'Git', color: '#F05032', abbr: 'Gt' },
-  { name: 'HTML5', color: '#E34F26', abbr: 'H5' },
-];
-
-function SkillBar({ name, level, icon, visible }) {
+function SkillBar({ name, level, visible }) {
   return (
     <div className="group">
-      <div className="flex items-center justify-between mb-2">
-        <span className="flex items-center gap-2 text-sm font-medium text-text-primary">
-          <span>{icon}</span>
+      <div className="flex items-center justify-between mb-2.5">
+        <span className="flex items-center gap-2.5 text-sm font-medium text-text-primary group-hover:text-accent transition-colors">
+          <span className="w-7 h-7 rounded-lg bg-bg-surface border border-border-subtle flex items-center justify-center p-1 shadow-sm group-hover:border-accent/50 group-hover:shadow-[0_0_12px_rgba(245,166,35,0.15)] transition-all">
+            <TechIcon name={name} className="w-4 h-4 flex-shrink-0" />
+          </span>
           {name}
         </span>
         <span className="text-xs font-mono text-accent opacity-0 group-hover:opacity-100 transition-opacity">
           {level}%
         </span>
       </div>
-      <div className="h-1 bg-bg-deep rounded-full overflow-hidden">
+      <div className="h-1.5 bg-bg-deep rounded-full overflow-hidden border border-border-subtle/50">
         {visible && (
           <div
             className="skill-bar-fill h-full rounded-full"
@@ -87,25 +79,6 @@ export default function Skills() {
           </h2>
         </div>
 
-        {/* Tech icon strip */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {TECH_ICONS.map(tech => (
-            <div
-              key={tech.name}
-              className="group flex flex-col items-center gap-2 cursor-default"
-            >
-              <div
-                className="w-14 h-14 rounded-2xl bg-bg-surface border border-border-subtle flex items-center justify-center font-mono font-bold text-sm transition-all duration-300 group-hover:scale-110 group-hover:border-current"
-                style={{ color: tech.color }}
-              >
-                {tech.abbr}
-              </div>
-              <span className="text-xs text-text-secondary group-hover:text-text-primary transition-colors">
-                {tech.name}
-              </span>
-            </div>
-          ))}
-        </div>
 
         {/* Skill bars grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -123,7 +96,6 @@ export default function Skills() {
                     key={skill.name}
                     name={skill.name}
                     level={skill.level}
-                    icon={skill.icon}
                     visible={visible}
                   />
                 ))}

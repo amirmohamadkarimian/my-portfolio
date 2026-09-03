@@ -9,7 +9,6 @@ const fa = {
     downloadCV: "دانلود رزومه",
   },
   hero: {
-    greeting: "سلام، من",
     name: "امیرمحمد",
     lastName: "کریمیان",
     role: "توسعه‌دهنده فرانت‌اند",
