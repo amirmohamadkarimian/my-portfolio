@@ -1,4 +1,5 @@
 {
+  "installCommand": "npm install --foreground-scripts",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
