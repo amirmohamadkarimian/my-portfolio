@@ -16,6 +16,17 @@ const PARTICLES = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
 export default function Hero() {
   const { t, isRTL } = useLang();
 
+  const handleSectionLink = (event, selector) => {
+    event.preventDefault();
+    const target = document.querySelector(selector);
+
+    if (!target) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    window.history.pushState(null, "", selector);
+  };
+
   return (
     <section
       id="hero"
@@ -118,7 +129,11 @@ export default function Hero() {
             <div
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
-              <a href="#projects" className="btn-primary">
+              <a
+                href="#projects"
+                onClick={(event) => handleSectionLink(event, "#projects")}
+                className="btn-primary"
+              >
                 {t.hero.cta}
                 <svg
                   width="16"
@@ -135,7 +150,11 @@ export default function Hero() {
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
               </a>
-              <a href="#contact" className="btn-secondary">
+              <a
+                href="#contact"
+                onClick={(event) => handleSectionLink(event, "#contact")}
+                className="btn-secondary"
+              >
                 {t.hero.ctaSecondary}
               </a>
             </div>
